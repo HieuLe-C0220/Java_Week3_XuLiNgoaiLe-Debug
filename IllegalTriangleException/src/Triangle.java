@@ -31,28 +31,24 @@ public class Triangle {
     public void setSide3(int side3) {
         this.side3 = side3;
     }
-    public boolean checkTriangle() {
-        if (side1+side2>side3 && side1+side3>side2 && side2+side3>side1) {
-            return true;
-        }
-        return false;
-    }
-    public int getParameter() throws IllegalTriangleException {
-        if (checkTriangle()) {
-            return side1+side2+side3;
+    public void checkTriangle() {
+        if (side1<=0 && side2<=0 && side3<=0) {
+            throw new ArithmeticException("Kiểm tra lại kích thước nhập");
+        } else if (side1+side2<=side3 || side1+side3<=side2 || side2+side3<=side1){
+            throw new ArithmeticException("Đó không phải tam giác");
         } else {
-            throw new IllegalTriangleException("Không phải tam giác");
+            System.out.println("Is triangle");
         }
     }
 
     public static void main(String[] args) {
-        Triangle triangle1 = new Triangle(6,8,10);
-        Triangle triangle2 = new Triangle(0,2,5);
         try {
-            System.out.println(triangle1.getParameter());
-            System.out.println(triangle2.getParameter());
-        } catch (IllegalTriangleException e) {
-            System.out.println(e.getErrorMessage());
+//            Triangle triangle1 = new Triangle(-6,-8,-10);
+//            triangle1.checkTriangle();
+            Triangle triangle2 = new Triangle(1,2,5);
+            triangle2.checkTriangle();
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
